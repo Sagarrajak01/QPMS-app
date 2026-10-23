@@ -31,14 +31,14 @@ jobs:
           distribution: 'zulu'
           java-version: '21'
           
-      - name: Build Unsigned Release APK
+      - name: Build Signed Debug APK
         working-directory: ./android
         run: |
           chmod +x gradlew
-          ./gradlew assembleRelease
+          ./gradlew assembleDebug
           
-      - name: Upload Release Artifact
+      - name: Upload Debug Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: qpms-release-unsigned.apk
-          path: android/app/build/outputs/apk/release/app-release-unsigned.apk
+          name: QPMS.apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
