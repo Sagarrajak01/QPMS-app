@@ -7,6 +7,18 @@ const config: CapacitorConfig = {
   server: {
     androidScheme: 'https',
     cleartext: true
+  },
+  plugins: {
+    StatusBar: {
+      overlaysWebView: false,
+      style: 'DARK',
+      backgroundColor: '#1f2937'
+    },
+    Keyboard: {
+      resize: 'body',
+      resizeOnFullScreen: true,
+      style: 'DARK'
+    }
   }
 };
 
