@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* Existing tailwind imports */
+
+@media print {
+  /* Hide the sidebar, topnav, buttons, etc. */
+  body * {
+    visibility: hidden;
+  }
+  
+  /* Make ONLY the paper preview visible and take full page */
+  #printable-paper, #printable-paper * {
+    visibility: visible;
+  }
+  
+  #printable-paper {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+    border: none;
+  }
+
+  /* Force page breaks between multiple sets */
+  .set-page-break {
+    page-break-after: always;
+  }
+}
+/* --- Mobile Safe Area Adjustments --- */
+@supports (padding-top: env(safe-area-inset-top)) {
+  body {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+    /* Prevent web-like bounce scrolling */
+    overscroll-behavior-y: none;
+    /* Prevent text selection unless explicitly enabled */
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  /* Allow text selection on inputs and textareas */
+  input, textarea {
+    -webkit-user-select: auto;
+    user-select: auto;
+  }
+}
