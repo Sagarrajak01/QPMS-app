@@ -26,4 +26,23 @@ api.interceptors.request.use(
   }
 );
 
+// Intercept responses to handle expired tokens globally
+api.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  async (error) => {
+    // If the server returns a 401 Unauthorized (invalid/expired token)
+    if (error.response && error.response.status === 401) {
+      // Clear native preferences
+      await Preferences.remove({ key: 'token' });
+      await Preferences.remove({ key: 'user' }); 
+      
+      // Force redirect to the login screen
+      window.location.href = '/login';
+    }
+    return Promise.reject(error);
+  }
+);
+
 export default api;
